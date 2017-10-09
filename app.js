@@ -59,7 +59,7 @@ function getFeedDatas(msg,session){
         case "repubblica":
             var titles=[];
             feed("http://www.repubblica.it/rss/cronaca/rss2.0.xml", function(err, articles) {
-                session.send("Risposta %s",articles.toString());
+                session.send("Risposta %s",articles.toString()); 
                 articles.forEach(function(article){
                     var format = "<a href='"+article.link+"'>"+article.title+"</a>\n";
                     titles.push(format);
