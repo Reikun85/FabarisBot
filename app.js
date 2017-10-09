@@ -31,7 +31,12 @@ server.post('/api/messages', connector.listen());
 // Create your bot with a function to receive messages from the user
 var bot = new builder.UniversalBot(connector, function (session) {
     var message = session.message.text;
-    var split = message.split(" ");
+    if(message.indexOf(" ").length > 0){
+        var split = message.split(" ");
+    } else{
+        var split = [message];
+    } 
+
 
     switch(split[0].toLowerCase()){
         case "feed":
