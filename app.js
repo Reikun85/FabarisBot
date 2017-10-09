@@ -61,7 +61,12 @@ function getFeedDatas(msg,session){
         case "repubblica":
                 feed("http://craphound.com/?feed=rss2", function(err, articles) {
                 if (err) throw err;
-                    session.send("Risposta da %s: %s",msg, articles.toString());
+                var items = []
+                articles.forEach(function(article) {
+                    format = "<a href='"+article.link+"'>"+article.title+"</a>;";
+                    items.push(format);
+                }, this);
+                session.send("Risposta da %s: %s",msg, items.split(";"));   
                 });
         break;
 
