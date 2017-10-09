@@ -4,7 +4,7 @@ A simple echo bot for the Microsoft Bot Framework.
 
 var restify = require('restify');
 var builder = require('botbuilder');
-var feed = require("feed-read");
+var feed = require('./src/feed.js');
 // Setup Restify Server
 var server = restify.createServer();
 server.listen(process.env.port || process.env.PORT || 3978, function () {
@@ -41,10 +41,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
     switch(split[0].toLowerCase()){
         case "feed":
             if(split.length > 1){
-               getFeedDatas(split[1].toLowerCase()).then(items =>{
-                session.send("Risposta da %s: %s",split[1],items);
-               });
-            
+               var items = getFeedDatas(split[1].toLowerCase(),session);
             }
             else session.send("specificare quale feed si desidera");
         break;
@@ -56,7 +53,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
     
 });
 
-async function getFeedDatas(msg){
+function getFeedDatas(msg,session){
 
     switch(msg){
         case "repubblica":
@@ -66,8 +63,10 @@ async function getFeedDatas(msg){
                     var format = "<a href='"+article.link+"'>"+article.title+"</a>\n";
                     titles.push(format);
                 });
+                session.send("Risposta da %s: %s",msg,titles.toString());
             });
-            return titles.toString();
+           
+            
         break;
 
         default:
