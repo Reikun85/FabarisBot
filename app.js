@@ -43,7 +43,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
             else session.send("specificare quale feed si desidera");
         break;
         default:
-            session.send("Nessuna funzione corrisponde alla keyword: %s", session.message.text);
+            session.send("Nessuna funzione corrisponde alla keyword: %s", split[0]);
         break;
     }
 
