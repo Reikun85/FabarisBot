@@ -54,11 +54,12 @@ var bot = new builder.UniversalBot(connector, function (session) {
 });
 
 function getFeedDatas(msg,session){
-
+    session.send("Sto interrogando il feed %s ... attendere",msg); 
     switch(msg){
         case "repubblica":
             var titles=[];
             feed.rss("http://www.repubblica.it/rss/cronaca/rss2.0.xml", function(err, articles) {
+                if (err) {session.send("Errore: %s",err);} 
                 session.send("Risposta %s",articles.toString()); 
                 articles.forEach(function(article){
                     var format = "<a href='"+article.link+"'>"+article.title+"</a>\n";
