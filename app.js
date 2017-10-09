@@ -4,6 +4,8 @@ A simple echo bot for the Microsoft Bot Framework.
 
 var restify = require('restify');
 var builder = require('botbuilder');
+var feed = require("feed-read");
+
 
 // Setup Restify Server
 var server = restify.createServer();
@@ -57,14 +59,10 @@ function getFeedDatas(msg,session){
     session.send("Sto interrogando il feed %s ... attendere",msg); 
     switch(msg){
         case "repubblica":
-                /*let url = "http://www.repubblica.it/rss/cronaca/rss2.0.xml";
-                reader.parse(url).then((feed) => {
-                    session.send("Articoli da %s: %s", msg, feed.toString());
-                }).catch((err) => {
-                    session.send(err);
-                }).finally(() => {
-                    session.send("Operazione completata");
-                });    */        
+                feed("http://craphound.com/?feed=rss2", function(err, articles) {
+                if (err) throw err;
+                    session.send("Risposta da %s: %s",msg, articles.toString());
+                });
         break;
 
         default:
