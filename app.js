@@ -33,10 +33,10 @@ var bot = new builder.UniversalBot(connector, function (session) {
     var message = session.message.text;
     var split = message.split("");
 
-    switch(split[0]){
+    switch(split[0].toLowerCase()){
         case "feed":
             if(split[1].length > 0){
-               var items = getFeedDatas(split[1]);
+               var items = getFeedDatas(split[1].toLowerCase());
                session.send("Risposta da %s: %s",split[1],items);
             
             }
