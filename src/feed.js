@@ -8,7 +8,7 @@ function getFeedDatas(msg){
             var titles=[];
             feed("http://www.repubblica.it/rss/cronaca/rss2.0.xml", function(err, articles) {
                 articles.forEach(function(article){
-                    var format = "<a href='"+article.link+"'>"+articles.title+"</a>\n";
+                    var format = "<a href='"+article.link+"'>"+article.title+"</a>\n";
                     titles.push(format);
                 });
             });
