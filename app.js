@@ -41,7 +41,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
     switch(split[0].toLowerCase()){
         case "feed":
             if(split.length > 1){
-               var items = getFeedDatas(split[1].toLowerCase(),session);
+              getFeedDatas(split[1].toLowerCase(),session);
             }
             else session.send("specificare quale feed si desidera");
         break;
@@ -58,7 +58,7 @@ function getFeedDatas(msg,session){
     switch(msg){
         case "repubblica":
             var titles=[];
-            feed("http://www.repubblica.it/rss/cronaca/rss2.0.xml", function(err, articles) {
+            feed.rss("http://www.repubblica.it/rss/cronaca/rss2.0.xml", function(err, articles) {
                 session.send("Risposta %s",articles.toString()); 
                 articles.forEach(function(article){
                     var format = "<a href='"+article.link+"'>"+article.title+"</a>\n";
