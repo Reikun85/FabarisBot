@@ -40,7 +40,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
 
     switch(split[0].toLowerCase()){
         case "feed":
-            if(split[1].length > 0){
+            if(split.length > 1){
                var items = getFeedDatas(split[1].toLowerCase());
                session.send("Risposta da %s: %s",split[1],items);
             
