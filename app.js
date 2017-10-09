@@ -63,10 +63,10 @@ function getFeedDatas(msg,session){
                 if (err) throw err;
                 var items = []
                 articles.forEach(function(article) {
-                    format = "<a href='"+article.link+"'>"+article.title+"</a>;";
+                    format = "<a href='"+article.link+"'>"+article.title+"</a>";
                     items.push(format);
                 }, this);
-                session.send("Risposta da %s: %s",msg, items.split(";"));   
+                session.send("Risposta da %s: %s",msg, items.join("\n"));   
                 });
         break;
 
