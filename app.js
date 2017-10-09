@@ -41,8 +41,9 @@ var bot = new builder.UniversalBot(connector, function (session) {
     switch(split[0].toLowerCase()){
         case "feed":
             if(split.length > 1){
-               var items = getFeedDatas(split[1].toLowerCase());
-               session.send("Risposta da %s: %s",split[1],items);
+               getFeedDatas(split[1].toLowerCase()).then(items =>{
+                session.send("Risposta da %s: %s",split[1],items);
+               });
             
             }
             else session.send("specificare quale feed si desidera");
@@ -55,7 +56,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
     
 });
 
-function getFeedDatas(msg){
+async function getFeedDatas(msg){
 
     switch(msg){
         case "repubblica":
