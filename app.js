@@ -77,17 +77,19 @@ function handlerOrchestratorCall(messageArgs,session,message){
             'values' : [{"value":requestValues}]
         }
     };
-    session.send("LOG:"+optionsRequest,message); 
+    session.send("LOG:"+JSON.stringify(optionsRequest),message); 
 
     callRequest(optionsRequest, function optionalCallback(err, httpResponse, body) {
         
         if (err) {
-            session.send({message:'Call Dashboard API failed\nresponse:',code:"KO"},message);
+            session.send("CHIAMATA ANNULLATA",message);
             //console.error('Call Dashboard API failed\nresponse:', err);
         
         }else{
-            var bodyParsed = JSON.parse(body);
-            session.send({message:bodyParsed.message,code:bodyParsed.code},message);
+            session.send("CHIAMATA EFFETTUATA CORRETTAMENTE",message);
+            session.send(JSON.stringify(body),message);
+            //var bodyParsed = JSON.parse(body);
+            //session.send({message:bodyParsed.message,code:bodyParsed.code},message);
         }
         
     });
