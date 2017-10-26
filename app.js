@@ -60,10 +60,12 @@ var bot = new builder.UniversalBot(connector, function (session) {
 function handlerOrchestratorCall(messageArgs,session,message){
     session.send("LOG: Sto interrogando l'orchestratore",message); 
 
-    var requestKey = messageArgs[0];
-    var requestParam = messageArgs[1];
+    var requestKey = messageArgs[0].toLowerCase();
+    var requestParam = messageArgs[1].toLowerCase();
     var requestValues = messageArgs[2];
-
+    session.send("LOG: Keyword: "+requestKey,message); 
+    session.send("LOG: Parameters: "+requestParam,message); 
+    session.send("LOG: Value: "+requestValues,message); 
     var callRequest = require("request");
     var endpointBot = "http://192.168.13.7:8005/botapi/@FabarisBot/";
     var optionsRequest = {
@@ -72,7 +74,7 @@ function handlerOrchestratorCall(messageArgs,session,message){
         headers: {
             'keyword'	: requestKey,
             'parameters': requestParam,
-            'values' : requestValues
+            'values' : [{"value":requestValues}]
         }
     };
     session.send("LOG:"+optionsRequest,message); 
