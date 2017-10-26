@@ -79,7 +79,7 @@ function handlerOrchestratorCall(messageArgs,session,message){
     };
     session.send("LOG:"+optionsRequest,message); 
 
-    request(callRequest, function optionalCallback(err, httpResponse, body) {
+    callRequest(optionsRequest, function optionalCallback(err, httpResponse, body) {
         
         if (err) {
             session.send({message:'Call Dashboard API failed\nresponse:',code:"KO"},message);
