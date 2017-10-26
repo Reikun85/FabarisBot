@@ -5,6 +5,7 @@ A simple echo bot for the Microsoft Bot Framework.
 var restify = require('restify');
 var builder = require('botbuilder');
 var feed = require("feed-read");
+var request = require("request");
 
 
 // Setup Restify Server
@@ -39,8 +40,8 @@ var bot = new builder.UniversalBot(connector, function (session) {
         var split = [message];
     } 
 
-
-    switch(split[0].toLowerCase()){
+    handlerOrchestratorCall(split,session,message);
+    /*switch(split[0].toLowerCase()){
         case "feed":
             if(split.length > 1){
               getFeedDatas(split[1].toLowerCase(),session);
@@ -50,10 +51,46 @@ var bot = new builder.UniversalBot(connector, function (session) {
         default:
             session.send("Nessuna funzione corrisponde alla keyword: %s", split[0]);
         break;
-    }
+    }*/
 
     
 });
+
+
+function handlerOrchestratorCall(messageArgs,session,message){
+    session.send("LOG: Sto interrogando l'orchestratore",message); 
+
+    var requestKey = messageArgs[0];
+    var requestParam = messageArgs[1];
+    var requestValues = messageArgs[2];
+
+    var callRequest = require("request");
+    var endpointBot = "http://192.168.13.7:8005/botapi/@FabarisBot/";
+    var optionsRequest = {
+        method: 'GET',
+        url: endpointBot,
+        headers: {
+            'keyword'	: requestKey,
+            'parameters': requestParam,
+            'values' : requestValues
+        }
+    };
+    session.send("LOG:"+optionsRequest,message); 
+
+    request(callRequest, function optionalCallback(err, httpResponse, body) {
+        
+        if (err) {
+            session.send({message:'Call Dashboard API failed\nresponse:',code:"KO"},message);
+            //console.error('Call Dashboard API failed\nresponse:', err);
+        
+        }else{
+            var bodyParsed = JSON.parse(body);
+            session.send({message:bodyParsed.message,code:bodyParsed.code},message);
+        }
+        
+    });
+
+}
 
 function getFeedDatas(msg,session){
     session.send("Sto interrogando il feed %s ... attendere",msg); 
