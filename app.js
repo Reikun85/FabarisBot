@@ -82,6 +82,7 @@ function handlerOrchestratorCall(messageArgs,session,message){
     callRequest(optionsRequest, function optionalCallback(err, httpResponse, body) {
         
         if (err) {
+            session.send(JSON.stringify(err),message);
             session.send("CHIAMATA ANNULLATA",message);
             //console.error('Call Dashboard API failed\nresponse:', err);
         
