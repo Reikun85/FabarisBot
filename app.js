@@ -52,6 +52,7 @@ var bot = new builder.UniversalBot(connector, function (session) {
             session.send("Nessuna funzione corrisponde alla keyword: %s", split[0]);
         break;
     }*/
+    
 
     
 });
