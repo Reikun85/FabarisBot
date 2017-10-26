@@ -60,9 +60,24 @@ var bot = new builder.UniversalBot(connector, function (session) {
 function handlerOrchestratorCall(messageArgs,session,message){
     session.send("LOG: Sto interrogando l'orchestratore",message); 
 
-    var requestKey = messageArgs[0].toLowerCase();
-    var requestParam = messageArgs[1].toLowerCase();
-    var requestValues = messageArgs[2];
+    var requestKey = "";
+    var requestParam = "";
+    var requestValues = "";
+
+    for(var i=0;i<messageArgs.length;i++){
+        switch(i){
+            case 0:
+                requestKey = messageArgs[i];
+            break;
+            case 1:
+                requestParam = messageArgs[i];
+            break;
+            default:
+                requestValues += messageArgs[i]+" ";
+            break;
+        }
+    }
+
     session.send("LOG: Keyword: "+requestKey,message); 
     session.send("LOG: Parameters: "+requestParam,message); 
     session.send("LOG: Value: "+requestValues,message); 
