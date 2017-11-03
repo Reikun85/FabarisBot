@@ -90,7 +90,7 @@ function handlerOrchestratorCall(messageArgs,session,message){
         headers: {
             'keyword'	: requestKey,
             'parameters': requestParam,
-            'values' : [{"value":requestValues}]
+            'values' : JSON.stringify([{"value":requestValues}])
         }
     };
     session.send("LOG:"+JSON.stringify(optionsRequest),message); 
