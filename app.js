@@ -74,7 +74,13 @@ function handlerOrchestratorCall(messageArgs,session,message){
                 requestParam = messageArgs[i];
             break;
             default:
+            
+            if(requestValues.length==0){
                 requestValues += messageArgs[i];
+            }else{
+                requestValues += messageArgs[i]+"%20";
+            }
+               
             break;
         }
     }
