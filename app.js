@@ -79,18 +79,18 @@ function handlerOrchestratorCall(messageArgs,session,message){
         }
     }
 
-    session.send("LOG: Keyword: "+requestKey,message); 
-    session.send("LOG: Parameters: "+requestParam,message); 
-    session.send("LOG: Value: "+requestValues,message); 
+    //session.send("LOG: Keyword: "+requestKey,message); 
+    //session.send("LOG: Parameters: "+requestParam,message); 
+    //session.send("LOG: Value: "+requestValues,message); 
     var callRequest = require("request");
     var endpointBot = "http://18.221.90.42:8080/botapi/@FabarisBot/";
     var optionsRequest = {
         method: 'GET',
         url: endpointBot,
         headers: {
-            'keyword'	: requestKey,
-            'parameters': requestParam,
-            'values' : JSON.stringify([{"value":requestValues}])
+            'keyword'	: requestKey.toLowerCase(),
+            'parameters': requestParam.toLowerCase(),
+            'values' : JSON.stringify([{"value":requestValues.toLowerCase()}])
         }
     };
     session.send("LOG:"+JSON.stringify(optionsRequest),message); 
@@ -104,7 +104,8 @@ function handlerOrchestratorCall(messageArgs,session,message){
         
         }else{
             session.send("CHIAMATA EFFETTUATA CORRETTAMENTE",message);
-            session.send(JSON.stringify(body),message);
+            var bodyParsed = JSON.parse(body);
+            session.send(bodyParsed.message,message);
             //var bodyParsed = JSON.parse(body);
             //session.send({message:bodyParsed.message,code:bodyParsed.code},message);
         }
