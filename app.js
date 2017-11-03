@@ -74,7 +74,7 @@ function handlerOrchestratorCall(messageArgs,session,message){
                 requestParam = messageArgs[i];
             break;
             default:
-                requestValues += messageArgs[i]+" ";
+                requestValues += messageArgs[i];
             break;
         }
     }
