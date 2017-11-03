@@ -83,7 +83,7 @@ function handlerOrchestratorCall(messageArgs,session,message){
     session.send("LOG: Parameters: "+requestParam,message); 
     session.send("LOG: Value: "+requestValues,message); 
     var callRequest = require("request");
-    var endpointBot = "http://192.168.13.7:8005/botapi/@FabarisBot/";
+    var endpointBot = "http://18.221.90.42:8005/botapi/@FabarisBot/";
     var optionsRequest = {
         method: 'GET',
         url: endpointBot,
