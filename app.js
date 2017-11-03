@@ -105,7 +105,7 @@ function handlerOrchestratorCall(messageArgs,session,message){
         }else{
             session.send("CHIAMATA EFFETTUATA CORRETTAMENTE",message);
             var bodyParsed = JSON.parse(body);
-            session.send(JSON.parse(bodyParsed.message).total_found,message);
+            session.send(JSON.stringify(body),message);
             //var bodyParsed = JSON.parse(body);
             //session.send({message:bodyParsed.message,code:bodyParsed.code},message);
         }
