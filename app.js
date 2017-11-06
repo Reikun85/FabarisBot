@@ -118,7 +118,7 @@ function handlerOrchestratorCall(messageArgs,session,message){
             if(recordsData.length){
                 var recordsOut = "";
                 for(var i=0;i<recordsData.length;i++){
-                    recordsOut +="Utente: "+recordsData[i]["_source"]["user"].full_name+"\n\n";
+                    recordsOut +="Utente: "+recordsData[i]["_source"]["user"]+"\n\n";
                 }
                 session.send(recordsOut,message);
             }
