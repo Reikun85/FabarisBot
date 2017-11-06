@@ -113,7 +113,7 @@ function handlerOrchestratorCall(messageArgs,session,message){
             var bodyParsed = JSON.parse(body);
             var bodyParsedMessage = JSON.stringify(bodyParsed.message);
             //session.send(body,message);
-            session.send(bodyParsedMessage+"\nProva testo",message);
+            session.send(bodyParsedMessage+"\n\nProva testo",message);
             //var bodyParsed = JSON.parse(body);
             //session.send({message:bodyParsed.message,code:bodyParsed.code},message);
         }
