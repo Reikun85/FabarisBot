@@ -117,7 +117,7 @@ function handlerOrchestratorCall(messageArgs,session,message){
             session.send("Record visibili: "+recordsData.length,message);
             if(recordsData.length){
                 for(var i=0;i<recordsData.length;i++){
-                    //session.send("Utente: "+recordsData[i]["_source"]["user"]["full_name"],message);
+                    session.send("Utente: "+recordsData[i]["_score"],message);
                 }
             }
 
