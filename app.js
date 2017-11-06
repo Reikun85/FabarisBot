@@ -110,6 +110,7 @@ function handlerOrchestratorCall(messageArgs,session,message){
         
         }else{
             //session.send("CHIAMATA EFFETTUATA CORRETTAMENTE",message);
+            session.send("Record trovati: "+body.message,message);
             var bodyParsed = JSON.parse(body);
             
             session.send("Record trovati: "+bodyParsed.message,message);
