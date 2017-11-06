@@ -113,6 +113,11 @@ function handlerOrchestratorCall(messageArgs,session,message){
             var bodyParsed = JSON.parse(body);
             
             session.send("Record trovati: "+bodyParsed["total_found"],message);
+            if(bodyParsed["data"].length){
+                for(var i=0;i<bodyParsed["data"].length;i++){
+                    session.send("Utente: "+bodyParsed["data"][i]["user"]["full_name"],message);
+                }
+            }
             //var bodyParsed = JSON.parse(body);
             //session.send({message:bodyParsed.message,code:bodyParsed.code},message);
         }
