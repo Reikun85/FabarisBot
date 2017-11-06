@@ -112,9 +112,13 @@ function handlerOrchestratorCall(messageArgs,session,message){
             //session.send("CHIAMATA EFFETTUATA CORRETTAMENTE",message);
             var parsedBody = JSON.parse(body);
             session.send("Record trovati: "+parsedBody["message"]["total_found"],message);
-            
-            //var bodyParsed = JSON.parse(body);
-            //session.send({message:bodyParsed.message,code:bodyParsed.code},message);
+            var recordsData = parsedBody["message"]["data"];
+            if(recordsData.length){
+                for(var i=0;i<recordsData.length;i++){
+                    session.send("Utente: "+recordsData[i]["_source"]["user"]["full_name"],message);
+                }
+            }
+
         }
         
     });
