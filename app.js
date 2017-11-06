@@ -112,10 +112,11 @@ function handlerOrchestratorCall(messageArgs,session,message){
             //session.send("CHIAMATA EFFETTUATA CORRETTAMENTE",message);
             var bodyParsed = JSON.parse(body);
             
-            session.send("Record trovati: "+bodyParsed.total_found,message);
-            if(bodyParsed["data"].length){
-                for(var i=0;i<bodyParsed["data"].length;i++){
-                    session.send("Utente: "+bodyParsed["data"][i]["user"]["full_name"],message);
+            session.send("Record trovati: "+bodyParsed.message.total_found,message);
+            var arrItems = bodyParsed.message.data;
+            if(arrItems.length){
+                for(var i=0;i<arrItems.length;i++){
+                    session.send("Utente: "+arrItems[i].user.full_name,message);
                 }
             }
             //var bodyParsed = JSON.parse(body);
