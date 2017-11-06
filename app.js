@@ -118,9 +118,13 @@ function handlerOrchestratorCall(messageArgs,session,message){
             if(recordsData.length){
                 var recordsOut = "";
                 for(var i=0;i<recordsData.length;i++){
-                    recordsOut +="Utente: "+recordsData[i]["_source"]["user"].full_name+"\n\n";
+                    recordsOut ="Utente: "+recordsData[i]["_source"]["user"].full_name+"\n\n";
+                    recordsOut +="username: "+recordsData[i]["_source"]["user"].username+"\n\n";
+                    recordsOut +="Link: "+recordsData[i]["_source"].link+"\n\n";
+                    recordsOut +="Contenuto: "+recordsData[i]["_source"]["caption"].text+"\n\n";
+                    session.send(recordsOut,message);
                 }
-                session.send(recordsOut,message);
+               
             }
 
         }
