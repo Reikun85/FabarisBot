@@ -126,7 +126,7 @@ function handlerOrchestratorCall(messageArgs,session,message){
                 
                 }
             }else{
-                var messageResponse = parsedBody["message"].replace("\n","\n\n");
+                var messageResponse = parsedBody["message"];
                 session.send(messageResponse,message);
             }
 
